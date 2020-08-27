@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Humanoido</title>
+    <script src="js/three.min.js"></script> 
+    <script src="js/controls/OrbitControls.js"></script>  
+    <script src="js/libs/dat.gui.min.js"></script>
+    <script src="js/funcionesH/funciones.js"></script>
+    <script src="js/funcionesH/RendeProyec.js"></script>  
+    <link rel="stylesheet" href="Css/Untitled-1.css" media="screen" >
+</head>
+<body>
+    <div id="info">HUMANOIDE</div>
+        
+    <script>
+        var scene, aspect, camera, renderer;
+		var rightFoot, rightLeg, rightArm, rightHand;// Pie derecho, pierna derecha, brazo derecho, namo derecha
+		var leftFoot, leftLeg, leftArm, leftHand;// Pie derecho 
+		var startTime = Date.now();
+				
+        var upArrow = false; //Ariba
+		var downArrow = false;//abajo
+        var leftArrow = false;//izquierda
+		var rightArrow = false;// escala 
+		var scaleUp = false; //aumentar
+		var scaleDown = false;//proporcional
+		var xAxis = true;
+		var yAxis = false;
+		var zAxis = false;
+		
+		var thetaSum=0;
+        var positivo=false;
+        var  cola = new THREE.Line(MediaEsfera(0.6));
+		
+		init();
+		animate();
+	
+		function init(){
+// Eventos de teclado
+       			var onKeyDown = function ( event ) {
+				switch ( event.keyCode ) {
+					case 38: // TRASLADAR ADELANTE
+						upArrow = true;
+						break;
+					case 40: // TRASLADAR ATRÁS
+						downArrow = true;
+						break;
+					case 83: // ESCALA AGRANDAR
+						scaleUp = true;
+						break;
+					case 87: // ESCALA DISMINUIR
+						scaleDown = true;
+						break;
+					case 37: // ROTAR CW
+						leftArrow = true;
+						break;
+					case 39: // ROTAR CCW
+						rightArrow = true;
+						break;
+					case 88: // SELECCIONAR EJE X DE ROTACION
+						yAxis = false;
+						zAxis = false;
+						xAxis = true;
+						break;
+					case 89: // SELECCIONAR EJE Y DE ROTACION
+						xAxis = false;
+						zAxis = false;
+						yAxis = true;
+						break;
+					case 90: // SELECCIONAR EJE Z DE 
+						xAxis = false;
+						yAxis = false;
+						zAxis = true;
+						break;
+				}
+			};	  
+		  			
+			var onKeyUp = function ( event ) {
+				switch ( event.keyCode ) {
+					case 38: // TRASLADAR
+						upArrow = false;
+						break;
+					case 40: // TRASLADAR
+						downArrow = false;
+						break;
+					case 37: // ROTAR CW
+						leftArrow = false;
+						break;
+					case 39: // ROTAR CCW
+						rightArrow = false;
+						break;
+					case 83: // ESCALA AGRANDAR
+						scaleUp = false;
+						break;
+					case 87: // ESCALA DISMINUIR
+						scaleDown = false;
+						break;
+                }
+            }
+//Filan	
+            document.addEventListener( 'keydown', onKeyDown, false );
+			document.addEventListener( 'keyup', onKeyUp, false );
+//CREACION MATERIO 
+         var materialHumano = new THREE.LineBasicMaterial({color: 0xeb9626}); // Naranja
+         var mateHumero = new THREE.LineBasicMaterial({color: 0x29cfdb}); // Azul 
+         var materialRadio = new THREE.LineBasicMaterial({color: 0xaa0aaf});//Morado
+         var materialFemur = new THREE.LineBasicMaterial({color: 0x18af0a});//Verde
+ //Fondo de la  esena
+        fondo();
+        
+//CREACION HUMANO
+       var  cabeza = new THREE.Line(esfera(0.4), materialHumano); 
+       var  cuello = new THREE.Line(Cilindro(0.2,0.2,50), mateHumero);
+       var  tronco = new THREE.Line(Cubo(1.4,2.2,0.6)); 
+       var  hombro1 = new THREE.Line(esfera(0.2), materialRadio); 
+       var  hombro2 = new THREE.Line(esfera(0.2), materialRadio); 
+      
+       var  brazo1 = new THREE.Line(Cilindro(2,0.2,50), mateHumero);  
+       var  brazo2 = new THREE.Line(Cilindro(2,0.2,50), mateHumero) 
+       var  codo1 = new THREE.Line(esfera(0.2), materialFemur);
+       var  codo2 = new THREE.Line(esfera(0.2), materialFemur); 
+       var  antebrazo1 = new THREE.Line(Cilindro(2,0.2,50), mateHumero);  
+       var  antebrazo2= new THREE.Line(Cilindro(2,0.2,50), mateHumero) 
+
+    // var  cola = new THREE.Line(MediaEsfera(0.6));
+
+       var  coxis1 = new THREE.Line(esfera(0.2),mateHumero );        
+       var  contrapierna1 = new THREE.Line(Cilindro(2,0.2,50), mateHumero);
+                 
+       var  Rodilla1 = new THREE.Line(esfera(0.2), mateHumero);       
+       var  pie1 = new THREE.Line(Cilindro(2,0.2,50), mateHumero);  
+
+       var  coxis2 = new THREE.Line(esfera(0.2), mateHumero); 
+       var  contrapierna2= new THREE.Line(Cilindro(2,0.2,50), mateHumero) 
+       var  Rodilla2 = new THREE.Line(esfera(0.2), mateHumero);
+       var  pie2 = new THREE.Line(Cilindro(2,0.2,50), mateHumero);  
+ 
+       
+       
+      //      scene.add(Cilin1);                   
+//POCISION   
+   
+    cabeza.applyMatrix(new THREE.Matrix4().makeTranslation(0.6,4.9,0.3));
+    cuello.applyMatrix(new THREE.Matrix4().makeTranslation(0.6,4.4,0.3));
+    tronco.applyMatrix(new THREE.Matrix4().makeTranslation(0,2.4,0));
+
+    hombro1.applyMatrix(new THREE.Matrix4().makeTranslation(-0.1,4.3,0.3));
+    brazo1.applyMatrix(new THREE.Matrix4().makeTranslation(-0.2,-1.8,0.1));
+    hombro1.rotation.x=-0.10;
+    codo1.applyMatrix(new THREE.Matrix4().makeTranslation(0,-0.09,0));
+    antebrazo1.applyMatrix(new THREE.Matrix4().makeTranslation(0,-2,0));
+
+    hombro2.applyMatrix(new THREE.Matrix4().makeTranslation(1.25,1.9,0.3));
+    brazo2.applyMatrix(new THREE.Matrix4().makeTranslation(0.2,-1.8,0.1));
+    hombro2.rotation.x=0.20;
+    codo2.applyMatrix(new THREE.Matrix4().makeTranslation(0,-0.09,0));
+    antebrazo2.applyMatrix(new THREE.Matrix4().makeTranslation(0,-2,0)); 
+
+    cola.applyMatrix(new THREE.Matrix4().makeTranslation(0.6,2.3,0.3));
+    cola.rotation.x=Math.PI/2;
+    coxis1.applyMatrix(new THREE.Matrix4().makeTranslation(-0.7,0.2,0.3));
+    coxis1.rotation.x=Math.PI/2;
+    contrapierna1.applyMatrix(new THREE.Matrix4().makeTranslation(0,0.1,0));
+    Rodilla1.applyMatrix(new THREE.Matrix4().makeTranslation(0,1.9,0));
+    pie1.applyMatrix(new THREE.Matrix4().makeTranslation(0,-0.1,0));
+
+    coxis2.applyMatrix(new THREE.Matrix4().makeTranslation(0.7,0.2,0.));
+    coxis2.rotation.x=Math.PI/2;
+    contrapierna2.applyMatrix(new THREE.Matrix4().makeTranslation(0,0.1,0));
+    Rodilla2.applyMatrix(new THREE.Matrix4().makeTranslation(0,1.9,0));
+    pie2.applyMatrix(new THREE.Matrix4().makeTranslation(0,-0.1,0));   
+            
+// Herencia 
+       cola.add(tronco);
+       tronco.add(cuello);
+       cuello.add(cabeza);
+       tronco.add(hombro1);
+       tronco.add(hombro2);
+       hombro1.add(brazo1);
+       hombro2.add(brazo2);
+       brazo1.add(codo1);
+       brazo2.add(codo2);
+       codo1.add(antebrazo1);
+       codo2.add(antebrazo2);
+       cola.add(coxis1);
+       cola.add(coxis2);
+       coxis1.add(contrapierna1);
+       coxis2.add(contrapierna2);
+       contrapierna1.add(Rodilla1);
+       contrapierna2.add(Rodilla2);
+       Rodilla1.add(pie1);
+       Rodilla2.add(pie2);
+// Mostrar 
+            //scene.add(cabeza);
+            scene.add(cabeza);
+            scene.add(cuello);
+            scene.add(tronco);
+            scene.add(hombro1);
+            scene.add(cola);
+
+			}
+    
+    function animate() {
+        render();
+        requestAnimationFrame( animate );
+    }
+    
+        render();
+    
+    </script>
+</body>
+</html>

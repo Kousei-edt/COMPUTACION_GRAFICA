@@ -35,9 +35,9 @@ function MediaEsfera(radio){
 function Cubo(an,AL,PRO){
     var geoCubo = new THREE.Geometry();
     var i = 0 , j = 0, k = 0;
-    for (i = 0; i < PRO ; i=i+0.04) {
-        for(j=0; j<AL;j=j+0.4){
-            for (k = 0; k < an ; k=k+0.4) {
+    for (i = 0; i < PRO ; i+=0.1) {
+        for(j = 0; j < AL; j+=0.1){
+            for (k = 0; k < an ; k+=0.1) {
               var punto = new THREE.Vector3();
               punto.x = k;
               punto.y = j;
@@ -98,42 +98,44 @@ function fondo(){
     var origin = new THREE.Vector3( 0, 0, 0 );
     var x = new THREE.Vector3( 1, 0, 0 );
     var y = new THREE.Vector3( 0, 1, 0 );
-      var z = new THREE.Vector3( 0, 0, 1 );
+    var z = new THREE.Vector3( 0, 0, 1 );
     var color1 = new THREE.Color( 0xFFFFFF );
-      var color2 = new THREE.Color( 0x333333 );
-      var colorR = new THREE.Color( 0xAA3333 );
-      var colorG = new THREE.Color( 0x33AA33 );
-      var colorB = new THREE.Color( 0x333366 );
-  
+    var color2 = new THREE.Color( 0x333333 );
+    var colorR = new THREE.Color( 0xAA3333 );
+    var colorG = new THREE.Color( 0x33AA33 );
+    var colorB = new THREE.Color( 0x333366 );
+    
+    
       //CREAR LAS GRILLAS PARA EL ESCENARIO
+
       var axesHelper = new THREE.AxesHelper( size );
       var gridHelperXY = new THREE.GridHelper( size, divisions, color1, color1);
       var gridHelperXZ = new THREE.GridHelper( size, divisions, color2, color2 );
       var gridHelperYZ = new THREE.GridHelper( size, divisions, color2, color2 );
+     
+//ROTARLAS PARA QUE QUEDEN EN EL ESPACIO ADECUADO
     
-    //ROTARLAS PARA QUE QUEDEN EN EL ESPACIO ADECUADO
     gridHelperXY.rotateOnWorldAxis ( x, THREE.Math.degToRad(90) );
     gridHelperXZ.rotateOnWorldAxis ( y, THREE.Math.degToRad(90) );
     gridHelperYZ.rotateOnWorldAxis ( z, THREE.Math.degToRad(90) );
     
-    //CREAR LAS FLECHAS QUE INDICAN LOS EJES DE COORDENADAS 3D
-    var arrowX = new THREE.ArrowHelper( x, origin, arrowSize, colorR );
-    var arrowY = new THREE.ArrowHelper( y, origin, arrowSize, colorG );
-    var arrowZ = new THREE.ArrowHelper( z, origin, arrowSize, colorB );
+//CREAR LAS FLECHAS QUE INDICAN LOS EJES DE COORDENADAS 3D
     
+//CREAR LAS FLECHAS ORIGEN COLA
+     var arrowX = new THREE.ArrowHelper( x, origin, arrowSize, colorR );
+     var arrowY = new THREE.ArrowHelper( y, origin, arrowSize, colorG );
+     var arrowZ = new THREE.ArrowHelper( z, origin, arrowSize, colorB );
 
 //AGREGAR A LA ESCENA
-     //scene.add( gridHelperXY );
-    scene.add( gridHelperXZ );
-      scene.add( arrowX );	
+//scene.add( gridHelperXY );
+      scene.add( gridHelperXZ );
+      scene.add( arrowX);	
       scene.add( arrowY );	
       scene.add( arrowZ );	
-    scene.add( esfera );
-  
-    camera.position.x = 5;
-    camera.position.y = 10;	 
-      camera.position.z =  10;
-    
+
+      camera.position.x = 5;
+      camera.position.y = 10 ;	 
+      camera.position.z =  10;    
       camera.lookAt( origin );
 
 

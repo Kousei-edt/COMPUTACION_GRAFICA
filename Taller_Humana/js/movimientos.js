@@ -69,7 +69,8 @@ function mostrar(){
         HomU_angleX: 0, HomU_angleY: 0, HomU_angleZ: 0,
         HomD_angleX: 0, HomD_angleY: 0, HomD_angleZ: 0,
         CodU_angleX: 0, CodU_angleY: 0, CodU_angleZ: 0,
-        CodD_angleX: 0, CodD_angleY: 0, CodD_angleZ: 0,  
+        CodD_angleX: 0, CodD_angleY: 0, CodD_angleZ: 0,
+        Cab_angleX: 0, Cab_angleY: 0, Cab_angleZ: 0,  
     };
 var rotation = function () {
 //Rotacion Humanoude 
@@ -107,6 +108,10 @@ var rotation = function () {
         CodD_angleX = THREE.Math.degToRad(rotationAngles.CodD_angleX);
         CodD_angleY = THREE.Math.degToRad(rotationAngles.CodD_angleY);
         // CodD_angleZ = THREE.Math.degToRad(rotationAngles.CodD_angleZ); 
+// Cabeza
+        Cab_angleX = THREE.Math.degToRad(rotationAngles.Cab_angleX);
+        Cab_angleY = THREE.Math.degToRad(rotationAngles.Cab_angleY);
+        //Cab_angleZ = THREE.Math.degToRad(rotationAngles.Cab_angleZ);   
     };
 
 // Crear menu  "var colota = new dat.GUI();" 
@@ -150,8 +155,11 @@ var rotation = function () {
     Ho.add(rotationAngles,"CodD_angleX",-150,0,1).onChange(rotation).name('Codo D X');
     Ho.add(rotationAngles,"CodD_angleY",-90,50,1).onChange(rotation).name('Codo D Y');
     //  Ho.add(rotationAngles,"CodD_angleZ",-90,50,1).onChange(rotation).name('Codo D Z');
-
-   
+//Cabeza
+    var cb = gui.addFolder('Cabeza');
+    cb.add(rotationAngles,"Cab_angleX",-150,0,1).onChange(rotation).name('Cabeza D X');
+    cb.add(rotationAngles,"Cab_angleY",-90,90,1).onChange(rotation).name('Cabeza D Y');
+    //cb.add(rotationAngles,"Cab_angleZ",-90,50,1).onChange(rotation).name('Cabeza D Z');  
     
 
     rotation();
@@ -251,7 +259,9 @@ var eulerRoC1 = new THREE.Euler(CodU_angleX,CodU_angleY,CodU_angleZ,'YZX');
 var eulerRoC2 = new THREE.Euler(CodD_angleX,CodD_angleY,CodD_angleZ,'YZX');
     codo2.setRotationFromEuler(eulerRoC2);
 
-    
+//Cabeza
+var eulerRoCz = new THREE.Euler(Cab_angleX,Cab_angleY,0,'YZX');
+    cabeza.setRotationFromEuler(eulerRoCz);
   
     camera.lookAt( 0, 5, 0 );   
     renderer.render( scene, camera );

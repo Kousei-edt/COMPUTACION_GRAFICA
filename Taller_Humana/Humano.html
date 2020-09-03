@@ -77,7 +77,11 @@
             var CodD_angleX =0;
             var CodD_angleY =0;
             var CodD_angleZ =0;
-    //Cuerpo
+// Cabeza            
+            var Cab_angleX = 0;            
+            var Cab_angleY = 0;
+            var Cab_angleZ = 0;
+//Cuerpo Principa variables 
             var  cadera= new THREE.Line(esfera(0.4)); 
             var  cola = new THREE.Line(MediaEsfera(0.6)); 
     //Piernas
@@ -98,6 +102,9 @@
             var  codo1 = new THREE.Line(esfera(0.2), materialFemur);
             var  codo2 = new THREE.Line(esfera(0.2), materialFemur);
 
+    //Cabeza
+            var  cabeza = new THREE.Line(esfera(0.4), materialHumano); 
+
 		
 		init();
 		animate();
@@ -115,7 +122,7 @@
         fondo();
         
 //CREACION HUMANO
-       var  cabeza = new THREE.Line(esfera(0.4), materialHumano); 
+       //var  cabeza = new THREE.Line(esfera(0.4), materialHumano); 
        var  cuello = new THREE.Line(Cilindro(0.2,0.2,10), mateHumero);
        //var  tronco = new THREE.Points(Cubo(1.4,2.2,0.3),materialHumano); Para sacar los puntos se coloca "Points"
       // var  hombro1 = new THREE.Line(esfera(0.2), materialRadio); 
@@ -167,7 +174,7 @@
     cola.applyMatrix(new THREE.Matrix4().makeTranslation(0,0,0));
     cola.rotation.x=Math.PI/2;
     cadera.applyMatrix(new THREE.Matrix4().makeTranslation(0,4.5,0));
-
+            
     coxis1.applyMatrix(new THREE.Matrix4().makeTranslation(-0.7,0,0.3));
     coxis1.rotation.x=Math.PI/2;
     contrapierna1.applyMatrix(new THREE.Matrix4().makeTranslation(0,0.1,0));

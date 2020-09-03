@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Transformaciones</title>
+        <style>
+            html, body { margin: 0; padding: 0; overflow: hidden; }
+            #info {
+                position: absolute;
+                padding: 10px;
+                width: 100%;
+                text-align: center;
+                color: #fd6500;
+            }
+            #Tex {
+                position: absolute;
+                padding: 10px;
+                width: 100%;
+                text-align: center;
+                color: #3bfd00;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="info">Sistema Solar<br/>
+          Rotar Sitema Tecla 38.<br/>
+            Rotar Luna Tecla 40 .<br/>
+            
+        </div>
+    <script src="js/three.min.js"></script>
+    <script>
+		var scene, aspect, camera, renderer;
+		var startTime = Date.now();
+                var object;		
+		var upArrow = false;
+		var downArrow = false;
+		var leftArrow = false;
+		var rightArrow = false;
+                var ROTASOLAR = 0;
+                var LunaSol =0;
+                var  Tierra,Sol;
+		
+		
+		
+		init();
+		animate();
+              
+                     
+	
+		function init(){
+			scene = new THREE.Scene();
+			aspect = window.innerWidth / window.innerHeight;
+			camera = new THREE.PerspectiveCamera( 45, aspect, 0.1, 1000);
+			renderer = new THREE.WebGLRenderer();
+			renderer.setSize( window.innerWidth, window.innerHeight );
+			document.body.appendChild( renderer.domElement );
+				  			
+			//EVENTOS DE TECLADO
+			
+			var onKeyDown = function ( event ) {
+				switch ( event.keyCode ) {
+					case 38: // Y POSITIVE - UP ARROW
+						upArrow = true;
+						break;
+					case 40: // Y NEGATIVE - DOWN ARROW
+						downArrow = true;
+						break;
+
+				
+				}
+			};	  
+		  			
+			var onKeyUp = function ( event ) {
+				upArrow = false;
+				downArrow = false;
+			};	  	
+			
+			document.addEventListener( 'keydown', onKeyDown, false );
+			document.addEventListener( 'keyup', onKeyUp, false );
+			
+			//ELEMENTOS DE ESCENA
+							  
+			var size = 10;
+			var arrowSize = 1;
+			var divisions = size;
+			var origin = new THREE.Vector3( 0, 0, 0 );
+			var x = new THREE.Vector3( 1, 0, 0 );
+			var y = new THREE.Vector3( 0, 1, 0 );
+		  	var z = new THREE.Vector3( 0, 0, 1 );
+			var color1 = new THREE.Color( 0xFFFFFF );
+		  	var color2 = new THREE.Color( 0x333333 );
+		  	var colorR = new THREE.Color( 0xAA0000 );
+		  	var colorG = new THREE.Color( 0x00AA00 );
+		  	var colorB = new THREE.Color( 0x0000AA );
+			var colorRd = new THREE.Color( 0xAA6666 );
+		  	var colorGd = new THREE.Color( 0x66AA66 );
+		  	var colorBd = new THREE.Color( 0x6666AA );
+		  
+		  	//CREAR LAS GRILLAS PARA EL ESCENARIO
+		  	var axesHelper = new THREE.AxesHelper( size );
+		  	var gridHelperXY = new THREE.GridHelper( size, divisions, color1, color1);
+		  	var gridHelperXZ = new THREE.GridHelper( size, divisions, color2, color2 );
+		  	var gridHelperYZ = new THREE.GridHelper( size, divisions, color2, color2 );
+            
+            //ROTARLAS PARA QUE QUEDEN EN EL ESPACIO ADECUADO
+            gridHelperXY.rotateOnWorldAxis ( x, THREE.Math.degToRad(90) );
+            gridHelperXZ.rotateOnWorldAxis ( y, THREE.Math.degToRad(90) );
+            gridHelperYZ.rotateOnWorldAxis ( z, THREE.Math.degToRad(90) );
+            
+            //CREAR LAS FLECHAS QUE INDICAN LOS EJES DE COORDENADAS 3D
+            var arrowX = new THREE.ArrowHelper( x, origin, arrowSize, colorR );
+            var arrowY = new THREE.ArrowHelper( y, origin, arrowSize, colorG );
+            var arrowZ = new THREE.ArrowHelper( z, origin, arrowSize, colorB );
+			
+			
+			
+//CREAR LOS MATERIALES
+       
+          var SolSistema = new THREE.MeshBasicMaterial( { color: 0xFF4D00, size: 0.1 } );
+           	var SolG = new THREE.SphereGeometry(1.8, 35, 30);
+			Sol = new THREE.Mesh(SolG, SolSistema); 
+        var Mercu = new THREE.MeshBasicMaterial( { color: 0xFFD100, size: 0.1 } );
+           	var MercurioG = new THREE.SphereGeometry(0.2, 35, 30);
+			var Mercurio = new THREE.Mesh(MercurioG, Mercu);
+        var Venu = new THREE.MeshBasicMaterial( { color: 0x87FF00, size: 0.1 } );
+           	var VenusTieG = new THREE.SphereGeometry(0.4, 35, 30);
+			var VenusT = new THREE.Mesh(VenusTieG, Venu);
+        var Tie = new THREE.MeshBasicMaterial( { color: 0x026120, size: 0.1 } );
+           	var TierG = new THREE.SphereGeometry(0.6, 35, 30);
+			 Tierra = new THREE.Mesh(TierG, Tie);
+        var Luna = new THREE.MeshBasicMaterial( { color: 0x53D1F7, size: 0.1 } );
+           	var LunaG = new THREE.SphereGeometry(0.1, 35, 30);
+			var LunaTierra = new THREE.Mesh(LunaG,Luna);
+        var Mar = new THREE.MeshBasicMaterial( { color: 0x3452F6, size: 0.1 } );
+           	var MarG = new THREE.SphereGeometry(0.4, 35, 30);
+			var Marte = new THREE.Mesh(MarG, Mar);
+        var Jup = new THREE.MeshBasicMaterial( { color: 0x34D3F6, size: 0.1 } );
+           	var JupiG = new THREE.SphereGeometry(0.8, 35, 30);
+			var Jupiter = new THREE.Mesh(JupiG, Jup);
+        var Satu = new THREE.MeshBasicMaterial( { color: 0xC134F6, size: 0.1 } );
+           	var SaturG = new THREE.SphereGeometry(0.7, 35, 30);
+			var Saturno  = new THREE.Mesh(SaturG, Satu);
+        var Ura = new THREE.MeshBasicMaterial( { color: 0xF63463, size: 0.1 } );
+           	var UranG = new THREE.SphereGeometry(0.3, 35, 30);
+			var Urano = new THREE.Mesh(UranG, Ura);
+
+        var Nept = new THREE.MeshBasicMaterial( { color: 0x115A66, size: 0.1 } );
+           	var NeptuG = new THREE.SphereGeometry(0.5, 35, 30);
+			var Neptuno = new THREE.Mesh(NeptuG, Nept);
+//Trastacion Objetos 
+        Mercurio.applyMatrix(new THREE.Matrix4().makeTranslation(3,0,0,0));
+        VenusT.applyMatrix(new THREE.Matrix4().makeTranslation(4,0,-3,0));
+        Tierra.applyMatrix(new THREE.Matrix4().makeTranslation(5.5,0,4,0));
+        LunaTierra.applyMatrix(new THREE.Matrix4().makeTranslation(1,0,0,0));
+       Marte.applyMatrix(new THREE.Matrix4().makeTranslation(7.5,0,-5,0));
+       
+       Jupiter.applyMatrix(new THREE.Matrix4().makeTranslation(9.5,0,0,0));
+       Saturno.applyMatrix(new THREE.Matrix4().makeTranslation(11.5,0,2,0));
+        Urano.applyMatrix(new THREE.Matrix4().makeTranslation(13,0,-5,0));
+       Neptuno.applyMatrix(new THREE.Matrix4().makeTranslation(14.2,0,6,0));
+
+
+
+// mostrar 
+            Sol.add(Mercurio); 
+            Sol.add(VenusT); 
+            Sol.add(Tierra);
+            Tierra.add(LunaTierra);
+            Sol.add(Marte);
+            Sol.add (Jupiter);
+            Sol.add(Saturno);
+            Sol.add(Urano);
+            Sol.add(Neptuno);
+
+            scene.add(Sol);          
+			
+   
+	//AGREGAR A LA ESCENA
+         scene.add( gridHelperXZ );
+	scene.add( arrowX );	
+	scene.add( arrowY );	
+	scene.add( arrowZ );	
+	scene.add( object );
+        
+			
+	//MOVER LA CAMARA
+	camera.position.x = 30;
+	camera.position.y = 40;	 
+	camera.position.z = 20;			
+	camera.lookAt( origin );
+
+        //Creacion Sistema Solar
+    
+//Rotacion 
+      
+ var rotatioAngulo = {
+                ROTASOLAR: 0,
+                LunaSol: 0,
+         }
+  var rotation = function () {
+                ROTASOLAR = THREE.Math.degToRad(rotatioAngulo.ROTASOLAR);
+                LunaSol = THREE.Math.degToRad(rotatioAngulo.LunaSol);
+
+        }
+
+
+       
+}
+    
+    function animate() {
+        render();
+        requestAnimationFrame( animate );
+    }
+    
+    function render(){
+// rotar 
+       if(upArrow) {
+                 ROTASOLAR += 0.1;
+                 LunaSol +=0.1; 
+                 var RotaSol = new THREE.Euler(0,ROTASOLAR,0,'XYZ');
+                Sol.setRotationFromEuler(RotaSol);          
+                                
+       }
+        if(downArrow) {
+                 ROTASOLAR += 0.1;
+                 LunaSol +=-0.1;
+                 var SistemaSolar = new THREE.Euler(0,LunaSol,0,'XYZ');
+                Tierra.setRotationFromEuler(SistemaSolar);   
+                             
+                } 
+                         
+               
+              
+    
+   
+        camera.lookAt( 0, 0, 0 );
+        renderer.render( scene, camera );
+
+        
+   
+ }
+  
+    </script>
+  </body>
+</html>

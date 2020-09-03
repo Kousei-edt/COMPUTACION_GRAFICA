@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Traslacion</title>
+    <style>
+      html, body { margin: 0; padding: 0; overflow: hidden; }
+      #info {
+          position: absolute;
+          padding: 10px;
+          width: 100%;
+          text-align: center;
+          color: #eee3e3;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="info">Cuadrado <br/>
+        Verde Primer Cuadrado<br/>
+        Rojo Apli Matrices <br/>
+
+            </div>
+    <script src="js/three.min.js"></script>
+    <script src="js/funciones.js"></script>
+    <script>
+		var scene, aspect, camera, renderer;
+		var startTime = Date.now();		
+		
+		var object;     
+        
+        
+		init();
+		animate();
+    
+	
+		function init(){
+           
+        
+			//INICIALIZACIÓN DE LA ESCENA
+			scene = new THREE.Scene();
+			aspect = window.innerWidth / window.innerHeight;
+			camera = new THREE.PerspectiveCamera( 45, aspect, 0.1, 1000);
+			renderer = new THREE.WebGLRenderer();
+			renderer.setSize( window.innerWidth, window.innerHeight );
+			document.body.appendChild( renderer.domElement );
+			
+			//ELEMENTOS DE ESCENA
+			var size = 10;
+			var arrowSize = 1;
+			var divisions = size;
+			var origin = new THREE.Vector3( 0, 0, 0 );
+			var x = new THREE.Vector3( 1, 0, 0 );
+			var y = new THREE.Vector3( 0, 1, 0 );
+		  	var z = new THREE.Vector3( 0, 0, 1 );
+			var color1 = new THREE.Color( 0xFFFFFF );
+		  	var color2 = new THREE.Color( 0x333333 );
+		  	var colorR = new THREE.Color( 0xAA3333 );
+		  	var colorG = new THREE.Color( 0x33AA33 );
+		  	var colorB = new THREE.Color( 0x333366 );	  
+            
+            //CREAR LAS FLECHAS QUE INDICAN LOS EJES DE COORDENADAS 3D
+            var arrowX = new THREE.ArrowHelper( x, origin, arrowSize, colorR );
+            var arrowY = new THREE.ArrowHelper( y, origin, arrowSize, colorG );
+            var arrowZ = new THREE.ArrowHelper( z, origin, arrowSize, colorB );
+			
+			//CREAR LAS GEOMETRÍAS
+            
+           
+            var ColorPuntos = new THREE.PointsMaterial({color: 0x72b817} ); 
+            var ColorPuntosDos = new THREE.PointsMaterial({color:0xf10e0e} ); 
+			var PU =  new THREE.Line(esfera(0.5),ColorPuntos);
+            PU.applyMatrix(new THREE.Matrix4().makeTranslation(10,10,0));
+            var PD =  new THREE.Line(esfera(0.5),ColorPuntos);
+            PD.applyMatrix(new THREE.Matrix4().makeTranslation(40,10,0));  
+            var PT =  new THREE.Line(esfera(0.5),ColorPuntos);
+            PT.applyMatrix(new THREE.Matrix4().makeTranslation(40,40,0));
+            var PC =  new THREE.Line(esfera(0.5),ColorPuntos);
+            PC.applyMatrix(new THREE.Matrix4().makeTranslation(10,40,0));   
+            
+//Esferas Tranformacion
+            var PU1 =  new THREE.Line(esfera(0.5),ColorPuntosDos);
+            PU1.applyMatrix(new THREE.Matrix4().makeTranslation(10,10,0));
+            var PD2 =  new THREE.Line(esfera(0.5),ColorPuntosDos);
+            PD2.applyMatrix(new THREE.Matrix4().makeTranslation(40,10,0));  
+            var PT3 =  new THREE.Line(esfera(0.5),ColorPuntosDos);
+            PT3.applyMatrix(new THREE.Matrix4().makeTranslation(40,40,0));
+            var PC4 =  new THREE.Line(esfera(0.5),ColorPuntosDos);
+            PC4.applyMatrix(new THREE.Matrix4().makeTranslation(10,40,0));
+			// Mostrar
+            scene.add(PU);
+            scene.add(PD);
+            scene.add(PT);
+            scene.add(PC);
+            // Matricez 
+            // Rotar
+            var R =  new THREE.Matrix4();
+            R.set(Math.cos(40),  0   ,Math.sin(40),  0,
+                       0      ,  1   ,     0       , 0,
+                -Math.sin(40) ,  0   ,Math.cos(40),  0,
+                      0      ,   0  ,     0      ,   1 );
+                            PU1.applyMatrix(R);
+                            PD2.applyMatrix(R);
+                            PT3.applyMatrix(R); 
+                            PC4.applyMatrix(R);
+            //MATRIZ DE TRASLACIÓN
+        var t = new THREE.Matrix4();		
+        t.set( 	9, 0, 0, 0,
+                0, 1, 0, 0, 
+                0, 0, 1, 0,
+                0, 0, 0, 1);
+
+                            PU1.applyMatrix(t);
+                            PD2.applyMatrix(t);
+                            PT3.applyMatrix(t); 
+                            PC4.applyMatrix(t);
+        // ESCALA 
+        var s = new THREE.Matrix4();
+		s.set( 	7, 0, 0, 0,
+				0, 1, 0, 0, 
+				0, 0, 1, 0,
+				0, 0, 0, 1	);	
+				
+                            PU1.applyMatrix(s);
+                            PD2.applyMatrix(s);
+                            PT3.applyMatrix(s); 
+                            PC4.applyMatrix(s);
+    
+      
+			
+			//Cuadro Dos 
+			
+            scene.add(PU1);
+            scene.add(PD2);
+            scene.add(PT3);
+            scene.add(PC4);
+		
+		  	//AGREGAR A LA ESCENA          
+			scene.add( object );
+			
+			//MOVER LA CÁMARA
+			camera.position.x =150;
+            camera.position.y = 20;	 
+		  	camera.position.z =  50;			
+		  	camera.lookAt( origin );
+			}
+    
+    function animate() {
+        render();
+        requestAnimationFrame( animate );
+    }
+    
+    function render(){
+       
+        camera.lookAt( 0, 5, 0 );
+        renderer.render( scene, camera );
+    }
+   
+    </script>
+  </body>
+</html>

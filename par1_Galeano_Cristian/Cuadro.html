@@ -50,7 +50,7 @@
 			var origin = new THREE.Vector3( 0, 0, 0 );
 			var x = new THREE.Vector3( 1, 0, 0 );
 			var y = new THREE.Vector3( 0, 1, 0 );
-		  	var z = new THREE.Vector3( 0, 0, 1 );
+		  var z = new THREE.Vector3( 0, 0, 1 );
 			var color1 = new THREE.Color( 0xFFFFFF );
 		  	var color2 = new THREE.Color( 0x333333 );
 		  	var colorR = new THREE.Color( 0xAA3333 );
@@ -102,10 +102,11 @@
                             PT3.applyMatrix(R); 
                             PC4.applyMatrix(R);
             //MATRIZ DE TRASLACIÓN
-        var t = new THREE.Matrix4();		
-        t.set( 	9, 0, 0, 0,
+        var t = new THREE.Matrix4();
+        		
+        t.set( 	1, 0, 0, 0,
                 0, 1, 0, 0, 
-                0, 0, 1, 0,
+                0, 0, 9, 0,
                 0, 0, 0, 1);
 
                             PU1.applyMatrix(t);
@@ -113,7 +114,7 @@
                             PT3.applyMatrix(t); 
                             PC4.applyMatrix(t);
         // ESCALA 
-        var s = new THREE.Matrix4();
+    var s = new THREE.Matrix4();
 		s.set( 	7, 0, 0, 0,
 				0, 1, 0, 0, 
 				0, 0, 1, 0,

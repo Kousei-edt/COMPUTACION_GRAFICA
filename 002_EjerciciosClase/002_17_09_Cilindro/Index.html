@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cilindro</title>
+    <script src="js/Funciones/three.min.js"></script>
+    <script src="js/controls/OrbitControls.js"></script>
+    <script src="js/Funciones/Escenario.js"></script>
+    <script src="js/Funciones/GeometriaPuntos.js"></script>
+    <link rel="stylesheet" href="Css/Estilos.css" media="screen">
+</head>
+<body>
+    <div id="info"> CAMILO GALEANO BOJACA</div>
+<script>
+    var scene, aspect, camera, renderer;
+    var fan = new Array(10);
+    var strip = new Array(10);
+    init();
+		animate();
+	
+        function init(){
+           
+                fondo();
+               //Luz();
+                Cilindro(10,2,6);
+                    //Alto-Trianculos-radio
+                CilinTriangulos(3,20,0.5);
+                
+             
+
+        }
+   
+        function animate() {
+            render();
+            controls.update();
+            requestAnimationFrame(animate);
+    }
+    render();
+</script>
+</body>
+</html>

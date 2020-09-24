@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Piramide</title>
+    <style>
+     
+            html, body { margin: 0; padding: 0; overflow: hidden; }
+            #info {
+                position: absolute;
+                padding: 10px;
+                width: 100%;
+                text-align: 100;
+                color: #000000;
+            }
+		
+        </style>
+    </style>
+  </head>
+  <body>
+
+    <script src="/js/Funciones/three.min.js"></script>
+	<script src="/js/controls/OrbitControls.js"></script>
+    <script src="/js/Funciones/Escenario.js"></script>
+    <script src="/js/Funciones/GeometriaPuntos.js"></script>
+
+   
+        
+  
+
+    <script>
+		var scene, aspect, camera,camera2,camera3, controls,auto,auto_2,cube,cube_2;       
+      
+     
+		
+		init();
+		animate();
+		function init(){
+
+             Fondo();              
+      
+            trianguloDos(5,0,0);
+
+
+			}
+            function animate(){
+
+requestAnimationFrame( animate );
+controls.update();
+render();
+}
+function render(){
+//matriz();
+renderer.render( scene, camera );
+}
+    </script>
+  </body>
+</html>

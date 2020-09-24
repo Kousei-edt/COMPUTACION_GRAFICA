@@ -118,8 +118,8 @@ function CilinTriangulos(n1,n2,r){
         }
  // geometriaUno.scale(0.25,0.25,1);
     geometriaUno.translate(0,Al,0);
-    fan[0] = new  TRIANGLE_FAN(geometriaUno, materialFan);
-    fan[0].draw();
+    U[0] = new  TRIANGLE_FAN(geometriaUno, materialFan);
+    U[0].draw();
 /* Extructura */
 
     var geometriaDosCilindro = new THREE.Geometry();	
@@ -138,8 +138,8 @@ function CilinTriangulos(n1,n2,r){
 			}
 			//geometriaeye3.scale(0.25,0.25,0.25);
 			geometriaDosCilindro.translate(0,0,0);
-			strip[3] = new TRIANGLE_STRIP(geometriaDosCilindro, materialFinta);;	
-            strip[3].draw();
+			      SS[3] = new TRIANGLE_STRIP(geometriaDosCilindro, materialFinta);;	
+            SS[3].draw();
 /* Cola*/
 var geometriaCola = new THREE.Geometry();
     var puntocero = new THREE.Vector3(0,0,0);
@@ -158,8 +158,8 @@ var geometriaCola = new THREE.Geometry();
         }
  // geometriaUno.scale(0.25,0.25,1);
     geometriaCola.translate(0,0,0);
-    fan[0] = new  TRIANGLE_FAN(geometriaCola, materialFan);
-    fan[0].draw();
+    U[0] = new  TRIANGLE_FAN(geometriaCola, materialFan);
+    U[0].draw();
 //* Eje
 var geometry = new THREE.SphereGeometry( 0.05, 15, 15 );
     var material = new THREE.MeshBasicMaterial( {color: 0xffff00} );

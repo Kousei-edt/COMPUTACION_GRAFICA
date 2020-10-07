@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Esfera</title>
+    <script src="js/Funciones/three.min.js"></script>
+    <script src="js/controls/OrbitControls.js"></script>
+    <script src="js/Funciones/Escenario.js"></script>
+    <script src="js/Funciones/Geometrias.js"></script>
+    <script src="js/Funciones/Cilindro.js"></script>
+    <script src="js/Funciones/Esfera.js"></script>
+    <!--Menu-->
+    <link rel="stylesheet" href="Css/maint.css">
+    
+   <!-- <link rel="stylesheet" href="Css/Estilos.css" media="screen"> -->
+</head>
+<body>
+ <div id="sidebar">
+      <div class="toggle-btn">
+        <span>&#9776</span>
+      </div>
+      <ul>
+        <li>
+          <img src="img/Final.png" alt="Logo Fazt" class="logo">
+        </li>
+        <li><a  href="Index.html">Home</a></li>
+        <li><a  href="Cilindro.html">Cilindro</a></li>
+        <li>Ttiangulo</li>
+        <li><a href="Esfera.html">Esfera</a></li>
+      </ul>
+    </div>
+
+<script>
+    var scene, aspect, camera, renderer;
+    var U = new Array(10);
+    var SS = new Array(10);
+    init();
+		animate();
+	
+        function init(){
+                fondo();
+                //EsferaGeo();
+                esferaPuntos(1,0,2,1.5);
+                //Luz();
+                EsferaMascara();
+
+        }
+    
+        function animate() {
+            render();
+            controls.update();
+            requestAnimationFrame(animate);
+    }
+    render();
+</script>
+
+<script src="js/libs/main.js"></script>
+</body>
+</html>

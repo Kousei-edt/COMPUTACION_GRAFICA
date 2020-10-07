@@ -135,8 +135,8 @@ function CilinTriangulos(n1,n2,r){
 			puntoeyelat2.y =0;
 			puntoeyelat2.z = puntoeyelat1.z;
 			geometriaDosCilindro.vertices.push( puntoeyelat2 );
-            geometriaDosCilindro.vertices.push( puntoeyelat1 );
-            var materialFinta = new THREE.MeshStandardMaterial( { color: 0xEF6703} );
+      geometriaDosCilindro.vertices.push( puntoeyelat1 );
+      var materialFinta = new THREE.MeshStandardMaterial( { color: 0xEF6703} );
 			}
 			//geometriaeye3.scale(0.25,0.25,0.25);
 			geometriaDosCilindro.translate(0,0,0);
@@ -162,15 +162,11 @@ function CilinTriangulos(n1,n2,r){
     geometriaCola.translate(0,0,0);
     U[0] = new  TRIANGLE_FAN(geometriaCola, materialFan);
     U[0].draw();
-//* Eje
-var geometry = new THREE.SphereGeometry( 0.05, 15, 15 );
+    //* Eje
+    var geometry = new THREE.SphereGeometry( 0.05, 15, 15 );
     var material = new THREE.MeshBasicMaterial( {color: 0xffff00} );
     var sphere = new THREE.Mesh( geometry, material );
     sphere.applyMatrix(new THREE.Matrix4().makeTranslation(0,0.2,0,0));
-
-    
-        
-    
    
 }
 function Luz(){
@@ -178,7 +174,7 @@ function Luz(){
      var ambient = new THREE.AmbientLight( 0xffffff, 2 );
      scene.add( ambient );
   
-    // var pointLight = new THREE.PointLight( 0xffffff, 1, 100 );
+    // var pointLight = new THREE.PointLight( 0x0F5469, 1, 100 );
     // pointLight.position.set( -5, -2, 5 );
     // scene.add( pointLight );
   

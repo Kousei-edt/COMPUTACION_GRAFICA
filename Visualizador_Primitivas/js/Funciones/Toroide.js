@@ -30,7 +30,7 @@ function toroide(rMayor,rMenor, resolucion){
 				geoToroide.faces.push(new THREE.Face3(i + 1, i + contadorDePuntos, i + contadorDePuntos+1));
 			}
 		}
-			var matToroide = new THREE.MeshBasicMaterial({ color: 'blue', vertexColors: THREE.FaceColors });
+			var matToroide = new THREE.MeshStandardMaterial({ color: 0xffffff, vertexColors: THREE.FaceColors });
             toroide = new THREE.Mesh(geoToroide,matToroide);
 			
 			//Se crea un pivote para el toroide

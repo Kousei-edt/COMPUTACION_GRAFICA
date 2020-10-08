@@ -16,7 +16,6 @@
     <script src="js/Funciones/Cono.js"></script>
     <script src="js/Funciones/octoaedro.js"></script>
     <script src="js/Funciones/Tetaedro.js"></script>
-  
 
     <!--Menu-->
     <link rel="stylesheet" href="Css/maint.css">
@@ -45,7 +44,6 @@
         <li><a href="Cubo.html">Cubo</a></li>
       </ul>
     </div>
-
 <script>
     var scene, aspect, camera, renderer;
     init();
@@ -53,15 +51,16 @@
 	
         function init(){
                 fondo();
-                letras();
+                Luz();
+                octahedro();
 
         }
     
         function animate() {
-           render();
+            render();
             controls.update();
             requestAnimationFrame(animate);
-            render_letras();
+            render_Octa();
     }
     render();
 </script>

@@ -16,6 +16,7 @@
     <script src="js/Funciones/Cono.js"></script>
     <script src="js/Funciones/octoaedro.js"></script>
     <script src="js/Funciones/Tetaedro.js"></script>
+  
 
     <!--Menu-->
     <link rel="stylesheet" href="Css/maint.css">
@@ -24,9 +25,12 @@
    <!-- <link rel="stylesheet" href="Css/Estilos.css" media="screen"> -->
 </head>
 <body>
- 
+  <div id="info">____ FDC ____<br/>
+    ° Daniel Leonardo Bustos <br/> 
+    ° Cristian Camilo Galeano <br/>
+    ° Andres Felipe Alvarado<br/></div>
   </div>
- <div id="sidebar">
+ <div id="sidebar"> 
       <div class="toggle-btn">
         <span>&#9776</span>
       </div>
@@ -44,6 +48,7 @@
         <li><a href="Cubo.html">Cubo</a></li>
       </ul>
     </div>
+
 <script>
     var scene, aspect, camera, renderer;
     init();
@@ -51,16 +56,15 @@
 	
         function init(){
                 fondo();
-                //Luz();
-                octahedro();
+                letras();
 
         }
     
         function animate() {
-            render();
+           render();
             controls.update();
             requestAnimationFrame(animate);
-            render_Octa();
+            render_letras();
     }
     render();
 </script>

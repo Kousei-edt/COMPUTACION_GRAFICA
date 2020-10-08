@@ -28,6 +28,8 @@ function esferaPuntos(x,y,z,radio){
         //return punesfera;
         scene.add(punesfera);
 }
+
+var aX = 0,aY = 0,aZ = 0,s = 1, centro;
 function EsferaMascara(){
 //Triangulos Malla
     class TRIANGLE_FAN{	
@@ -65,7 +67,7 @@ function EsferaMascara(){
           return strip;
         }
       }
-
+      var materialFan = new THREE.MeshStandardMaterial( { color: 0xffffff} );
 // Geometria
 var contadorDePuntos =0;
 var geoEsfera = new THREE.Geometry();
@@ -83,8 +85,9 @@ for( var i = 0; i < resZ; i++){
         punto.y = radio * Math.sin( ( j * 2 * Math.PI )/resXY) * Math.sin(i);
         punto.z = radio * Math.cos(i) ;
         geoEsfera.vertices.push( punto);    
-        var materialFan = new THREE.MeshStandardMaterial( { color: 0x32EE54} )
-     
+       
+   var matPunto = new  THREE.MeshStandardMaterial( { color: 0xCCCCCC} );
+
     }        
 } 
 //
@@ -93,16 +96,53 @@ for (var i = 0; i < geoEsfera.vertices.length; i++) {
     if (i + contadorDePuntos < geoEsfera.vertices.length-1){
             geoEsfera.faces.push(new THREE.Face3(i, i + contadorDePuntos, i+1));
             geoEsfera.faces.push(new THREE.Face3(i + 1, i + contadorDePuntos, i + contadorDePuntos+1));
+           
         }
     } 
+    //! Punto
+    //Se crea un pivote para el toroide
+    var geoPunto = new THREE.Geometry();
+    geoPunto.vertices.push(new THREE.Vector3(0,0,0));
+    var matPunto = new THREE.PointsMaterial( { color: 0x000000, size: 0.1 } );
+    centro = new THREE.Points(geoPunto,matPunto);
 //var MaterialEsfera = new THREE.MeshBasicMaterial({color: 0xEF6703});
-
-    //var VerMaterial    = new THREE.Mesh(geoEsfera,materialFan);
-    //scene.add(VerMaterial); 
-   U[0] = new  TRIANGLE_FAN(geoEsfera, materialFan);
+    var VerMaterial    = new THREE.Mesh(geoEsfera,materialFan);
+    
+  U[0] = new  TRIANGLE_FAN(geoEsfera, materialFan);
    U[0].draw();
-  
-   
+   centro.add(VerMaterial);
+    scene.add(centro); 
+    var TranformacionesEsfera ={
+      Rotar_X : 0,
+	    Rotar_Y : 0,
+	    Rotar_Z : 0,
+	    Escalar : 1
+    }
+    function Tranformacion (){
+      aX = THREE.Math.degToRad(TranformacionesEsfera.Rotar_X);
+      aY = THREE.Math.degToRad(TranformacionesEsfera.Rotar_Y);
+      aZ = THREE.Math.degToRad(TranformacionesEsfera.Rotar_Z);
+      s  = TranformacionesEsfera.Escalar;
+
+    }  
+    var gui = new dat.GUI();
+    var rotar = gui.addFolder("Rotar");
+    var escalar = gui.addFolder("Escalar");
+    
+      rotar.add(TranformacionesEsfera, 'Rotar_X', -90, 90).step(0.1).name('Rotar en X').onChange(Tranformacion);
+      rotar.add(TranformacionesEsfera, 'Rotar_Y', -90, 90).step(0.1).name('Rotar en Y').onChange(Tranformacion);
+      rotar.add(TranformacionesEsfera, 'Rotar_Z', -90, 90).step(0.1).name('Rotar en Z').onChange(Tranformacion);	
+      escalar.add(TranformacionesEsfera, 'Escalar',-5,5).step(0.1).onChange(Tranformacion);
+      
+
+}
+function Render_Esfera(){
+
+  centro.scale.x = s;
+  centro.scale.y = s;
+  centro.scale.z = s;
+  var Rotacion = new THREE.Euler(aX, aY, aZ, 'XYZ');
+  centro.setRotationFromEuler(Rotacion);
 
 }
 function Luz(){

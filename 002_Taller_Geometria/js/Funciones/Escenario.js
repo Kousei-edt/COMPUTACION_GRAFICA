@@ -49,8 +49,8 @@ function fondo(){
     scene.add( arrowY );  
     scene.add( arrowZ );  
 
-    camera.position.x = 5;
-    camera.position.y = 10 ;   
+    camera.position.x = 0;
+    camera.position.y = 2 ;   
     camera.position.z =  10;    
     camera.lookAt( origin );
 }

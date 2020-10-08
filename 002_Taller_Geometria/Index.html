@@ -6,9 +6,18 @@
     <title>Geometria</title>
     <script src="js/Funciones/three.min.js"></script>
     <script src="js/controls/OrbitControls.js"></script>
+    <script src="js/libs/dat.gui.min.js"></script>
     <script src="js/Funciones/Escenario.js"></script>
     <script src="js/Funciones/Geometrias.js"></script>
     <script src="js/Funciones/Cilindro.js"></script>
+    <script src="js/Funciones/Toroide.js"></script>
+    <script src="js/Funciones/fontJSON.JSON"></script>
+    <script src="js/Funciones/Casa.js"></script>
+    <script src="js/Funciones/Cono.js"></script>
+    <script src="js/Funciones/octoaedro.js"></script>
+    <script src="js/Funciones/Tetaedro.js"></script>
+  
+
     <!--Menu-->
     <link rel="stylesheet" href="Css/maint.css">
     <link rel="stylesheet" href="Css/pushbar.css">
@@ -26,10 +35,14 @@
         <li>
           <img src="img/Final.png" alt="Logo Fazt" class="logo">
         </li>
-        <li><a  href="Index.html">Home</a></li>
+        <li><a href="Index.html">Home</a></li>
         <li><a  href="Cilindro.html">Cilindro</a></li>
-        <li>Ttiangulo</li>
+        <li><a href="Toroide.html">Toroide</a></li>
         <li><a href="Esfera.html">Esfera</a></li>
+        <li><a href="Cono.html">Cono</a></li>
+        <li><a href="Octa.html">Octaedro</a></li>
+        <li><a href="Tetaedro.html"</a>Tetaedro</li>
+        <li><a href="Cubo.html">Cubo</a></li>
       </ul>
     </div>
 
@@ -40,13 +53,15 @@
 	
         function init(){
                 fondo();
+                letras();
 
         }
     
         function animate() {
-            render();
+           render();
             controls.update();
             requestAnimationFrame(animate);
+            render_letras();
     }
     render();
 </script>

@@ -1,16 +1,16 @@
 function fondo(){
-  
+   
   scene = new THREE.Scene();
   aspect = window.innerWidth / window.innerHeight;
-  camera = new THREE.PerspectiveCamera(45, aspect, 0.1, 1000);
+  camera = new THREE.PerspectiveCamera(50, aspect, 0.1, 1000);
   renderer = new THREE.WebGLRenderer();
   renderer.setSize(window.innerWidth, window.innerHeight);
   document.body.appendChild(renderer.domElement);
 
   controls = new THREE.OrbitControls(camera, renderer.domElement);
-  //scene.background =new THREE.Color( 0xFFFFFF );
+
    
-  var size = 40;
+  var size = 10;
   var arrowSize = 1;
   var divisions = size;
   var origin = new THREE.Vector3( 0, 0, 0 );
@@ -49,9 +49,9 @@ function fondo(){
     scene.add( arrowY );  
     scene.add( arrowZ );  
 
-    camera.position.x = 0;
-    camera.position.y = 20;   
-    camera.position.z =  40;    
+    camera.position.x = 5;
+    camera.position.y = 10 ;   
+    camera.position.z =  10;    
     camera.lookAt( origin );
 }
 
@@ -61,53 +61,16 @@ function render() {
 }
 
 function Luz(){
-  //CREAR ILUMINACIÓN Ambiente (colo, Intensidad)
+  //CREAR ILUMINACIÓN
    var ambient = new THREE.AmbientLight( 0xffffff, 2 );
-   scene.add( ambient );  
-} 
-function LuzDos(){
-  // Luz direccianl 
-  var directionalLight = new THREE.DirectionalLight( 0xffffff, 0.5 );
-  scene.add( directionalLight );
-}
-function LuzTres(){
-  //Luz  HemisferioLuz 
-  var light = new THREE.HemisphereLight( 0xffffff, 0xCE2A06, 1 );
-  scene.add( light );
-}
-function LuzCuatro(){
-  //Pointlight
-  var light = new THREE.PointLight( 0xff0000, 1, 100 );
-  light.position.set( 50, 50, 50 );
-  scene.add( light );
-}
-function LuzCinco (){
- //CREAR ILUMINACIÓN
- var ambient = new THREE.AmbientLight( 0xffffff, 1 );
- scene.add( ambient );
- 
- var pointLight1 = new THREE.PointLight( 0xffffff, .2, 100 );
- pointLight1.position.set( 10, 10, -10 );
- scene.add( pointLight1 );
+   scene.add( ambient );
 
-var pointLight2 = new THREE.PointLight( 0xffffff, .5, 100 );
- pointLight2.position.set( 20, 20, 20 );
- scene.add( pointLight2 );
-}
-function notasMaterial(){
-  var material = new THREE.RawShaderMaterial( {
+  // var pointLight = new THREE.PointLight( 0xffffff, 1, 100 );
+  // pointLight.position.set( -5, -2, 5 );
+  // scene.add( pointLight );
 
-    uniforms: {
-      time: { value: 1.0 }
-    },
-    vertexShader: document.getElementById( 'vertexShader' ).textContent,
-    fragmentShader: document.getElementById( 'fragmentShader' ).textContent,
-  
-  } );
-
-//2
-
-
-
-
+  // var pointLight = new THREE.PointLight( 0xffffff, .5, 100 );
+  // pointLight.position.set( 5, -2, -5 );
+  // scene.add( pointLight );
+// Creación de Escenario
 }

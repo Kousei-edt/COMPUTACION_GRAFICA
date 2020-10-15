@@ -1,0 +1,22 @@
+*{
+    margin: 0%;
+    padding: 0%;
+}
+
+#contenidos{  
+
+    width:auto; 
+    height:auto; 
+    margin: auto;    
+    background-color: skyblue;
+}
+.Cuerpo{
+   widows: auto;; 
+    height:auto;   
+    text-align: center;
+    margin-right: 50%;
+
+ 
+    background-color: rgba(4, 0, 243, 0.226);
+}
+

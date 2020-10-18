@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>1.3</title>
+    <script src="js/Funciones/three.min.js"></script>
+    <script src="js/controls/OrbitControls.js"></script>
+    <script src="js/Funciones/Escenario.js"></script>
+    <script src="js/Funciones/GeometriaPrimitiva.js"></script>
+    <script src="js/libs/csg.js"></script>
+    <script src="js/libs/THREE.CSG.js"></script>
+    <script src="js/Funciones/Escenario.js"></script>
+    <script src="js/Funciones/LLanta.js"></script>
+    <script src="js/Funciones/Carro.js"></script>
+    <script src="js/Funciones/Modelo3D.js"></script>
+
+
+</head>
+<body>
+  <!-- <div id="info"> CAMILO GALEANO BOJACA</div>-->
+<script>
+    var scene, aspect, camera, renderer;
+    var Iz = false;         //Translacion
+            var Dr = false;         //Translacion
+            var leftArrow = false;
+            var rightArrow = false;
+            var sButton = false;
+            var wButton = false;
+            var upArrow = false;    //Translacion
+            var downArrow = false;  //Translacion
+    init();
+		animate();
+	
+        function init(){
+         
+                fondo();
+                LuzDos();
+                Modelo();
+              
+            
+
+
+}
+   
+        function animate() {
+            render();
+            controls.update();
+            requestAnimationFrame(animate);
+    }
+    render();
+</script>
+</body>
+</html>

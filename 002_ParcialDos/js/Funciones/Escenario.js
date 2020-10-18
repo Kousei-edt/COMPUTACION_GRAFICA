@@ -94,6 +94,19 @@ var pointLight2 = new THREE.PointLight( 0xffffff, .5, 100 );
  pointLight2.position.set( 20, 20, 20 );
  scene.add( pointLight2 );
 }
+function LuzSeis (){
+  var light = new THREE.DirectionalLight(0xFFFFFF);
+  light.position.set(0, 10, 5);
+  scene.add(light);
+  var light2 = new THREE.DirectionalLight(0xFFFFFF);
+  light2.position.set(5, 10,0);
+  scene.add(light2);
+   var light3 = new THREE.DirectionalLight(0xFFFFF);
+  light3.position.set(5, -10,0);
+  scene.add(light3);
+
+
+}
 function notasMaterial(){
   var material = new THREE.RawShaderMaterial( {
 

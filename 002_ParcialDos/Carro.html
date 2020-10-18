@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Segundo Corte</title>
+    <title>1.2</title>
     <script src="js/Funciones/three.min.js"></script>
     <script src="js/controls/OrbitControls.js"></script>
     <script src="js/Funciones/Escenario.js"></script>
@@ -11,7 +11,6 @@
     <script src="js/libs/csg.js"></script>
     <script src="js/libs/THREE.CSG.js"></script>
     <script src="js/Funciones/Escenario.js"></script>
-    <script src="js/Funciones/LLanta.js"></script>
     <script src="js/Funciones/Carro.js"></script>
 
 
@@ -27,8 +26,8 @@
          
                 fondo();
                 LuzCuatro();
-                moldellantas();
-               // Carrito();
+                var mostrar = Carrito().clone();
+               scene.add(mostrar);
             
 
 

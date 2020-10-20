@@ -1,10 +1,11 @@
 header{
-    width: 1000%;
+    width: auto;
+    background: #06060f;
 }
 nav{
-    margin: 20px;
-    width: 90%;
-    max-width: 1000px;
+    margin: 0PX;
+    width: 100%;
+    max-width: 100%;
 }
 nav ul{
     list-style: none; 
@@ -13,7 +14,7 @@ nav>ul{
     display: table;
     overflow: hidden;
     width: 100%;
-    background: #000000;
+    background: #06060f;
     position: relative;
 } 
 nav>ul li{
@@ -97,4 +98,10 @@ nav >ul li a .Cuarto{
 }
 nav >ul li a .Quinto{
     background: #b40b65;
+}
+/* Menu superior*/
+.menu-fixed {
+   position: fixed;
+   z-index: 1000;
+   top: 0; 
 }

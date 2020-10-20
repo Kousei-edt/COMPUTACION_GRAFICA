@@ -8,6 +8,7 @@
     <script src="js/controls/OrbitControls.js"></script>
     <script src="js/Funciones/Escenario.js"></script>
     <script src="js/libs/dat.gui.min.js"></script>
+    <script src="js/Funciones/GeometriaPrimitiva.js"></script>
     <script src="js/Funciones/Home.js"></script>
   
     <link rel="stylesheet" href="css/main.css" media="screen"> 
@@ -16,37 +17,35 @@
 </head>
 <body>
     <header>
-        <nav><ul>
+        <nav class="menu-fixed"><ul>
             <li><a href="#" ><span class="Primero"><i class="icon icon-home "></i></span>Home</a></li>
             <li><a href="#" ><span class="Segundo"><i class="icon icon-light-bulb"></i></span>Quiénes </a></li>
-            <li><a href="#" ><span class="Tercero"><i class="icon icon-game-controller "></i></span>Servicios</a>
-                <ul><li><a href="">Servicio 1</a></li>
-                </ul>
-                </li>
-            <li><a href="#" ><span class="Cuarto"><i class="icon icon-save "></i></span>Blog</a></li>
+            <li><a href="#" ><span class="Tercero"><i class="icon icon-game-controller "></i></span>Gamble</a> </li>
+                   <li><a href="#" ><span class="Cuarto"><i class="icon icon-save "></i></span>Blog</a></li>
             <li><a href="#" ><span class="Quinto"><i class="icon icon-block"></i></span>Contacto</a></li>
         </ul></nav> 
-    </header>
-<div id="contenidos"> 
-    <p><h1>Home</h1></p>
-    <div class="Cuerpo">   
-        <h2>Js Animacion</h2>
-        <script >
+
+<!-- -->
+        <var >
+        <script  >  
             var scene, aspect, camera, renderer;
             init();
             animate();
-        
+
             function init(){
-                    fondo();    
+                    fondo();
+                    CuboPrimitivo();    
             }       
             function animate() {
                 render();
                 controls.update();
                 requestAnimationFrame(animate);
-             }
+            }
             render();
-         </script> 
-    </div>
-</div>
+        </script> 
+        </var>
+    </header>
+   
+    
 </body>
 </html>

@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html>
+  <head>
+      <meta charset="utf-8">
+    <title>Three.js</title>
+   <link rel="stylesheet" type="text/css" href="style.css">
+    <style>
+        html, body { margin: 0; padding: 0; overflow: hidden;}
+    </style>
+  </head>
+   
+
+  <body>
+	<div class="cuadros" id="cuadro">
+		<!-- <img src="https://homecenterco.scene7.com/is/image/SodimacCO/348459_1?fmt=jpg&fit=constrain,1&wid=70&hei=70" alt="roca"> -->
+	</div>
+	<div class="cuadros" id="barrera">
+		
+	</div>
+    <div class="cuadros" id="cuadrogrande">
+		
+	</div>
+     <div class="cuadros" id="menu">
+         
+</div>
+        <div class= "cuadros"id="block3">
+            </div>
+         <div class= "cuadros" id="block4">
+                </div> 
+
+	
+ <script src="js/three.js"></script>
+	<script src="js/controls/OrbitControls.js"></script>
+	<script src="js/csg.js"></script>
+	<script src="js/THREE.CSG.js"></script>
+    <script src="js/loaders/FBXLoader.js"></script>
+    <script>
+
+ 
+			var container, stats, controls, div;
+			var camera, scene, renderer, light;
+			var plane;
+			var mouse, raycaster, isShiftDown = false,blockt = false,blockp = false;
+            var block3=false,block4=false;
+         var cuadrado;
+			var rollOverMesh, rollOverMaterial;
+			var cubeGeo;
+            var cubeMaterial1 = new THREE.MeshLambertMaterial( { color: 0xFFFFFF, map: new THREE.TextureLoader().load( 'https://raw.githubusercontent.com/Kousei-edt/ProyectoFinal/master/assets/img/activity-img3.png' ),opacity: 1 } );
+            var cubeMaterial2 = new THREE.MeshLambertMaterial( { color: 0xFFFFFF, map: new THREE.TextureLoader().load( 'https://homecenterco.scene7.com/is/image/SodimacCO/348459_1?fmt=jpg&fit=constrain,1&wid=70&hei=70' ),opacity: 1 } );
+            var cubeMaterial3 = new THREE.MeshLambertMaterial( { color: 0xFFFFFF, map: new THREE.TextureLoader().load( 'https://kousei-edt.github.io/ProyectoFinal/assets/img/girl3.jpg' ),opacity: 1 } );
+            var cubeMaterial4 = new THREE.MeshLambertMaterial( { color: 0xFFFFFF, map: new THREE.TextureLoader().load( 'l.jpg' ),opacity: 1 } );
+        
+        
+        
+        
+        
+         var frustumSize = 5;
+        var aspect,camera2;
+			var objects = [];
+			init();
+			animate();
+            Voxel();
+			function init() {
+
+				camera = new THREE.PerspectiveCamera( 45, window.innerWidth / window.innerHeight, 1, 10000 );
+				camera.position.set( 500, 800, 1300 );
+				camera.lookAt( 0, 0, 0 );
+				scene = new THREE.Scene();
+                
+			
+
+				// grid
+
+				var gridHelper = new THREE.GridHelper( 1000, 20 );
+				scene.add( gridHelper );
+
+				//
+
+				raycaster = new THREE.Raycaster();
+				mouse = new THREE.Vector2();
+
+				var geometry = new THREE.PlaneBufferGeometry( 1000, 1000 );
+				geometry.rotateX( - Math.PI / 2 );
+
+				plane = new THREE.Mesh( geometry, new THREE.MeshBasicMaterial( { visible: false } ) );
+				scene.add( plane );
+
+				objects.push( plane );
+
+				// lights
+
+                                var ambient = new THREE.AmbientLight( 0xffffff, 1 );
+                                scene.add( ambient );
+			
+                                 var pointLight = new THREE.PointLight( 0xffffff, 1, 100 );
+                                 pointLight.position.set( -5, 1, 5 );
+                                 scene.add( pointLight );
+			
+                                 var pointLight = new THREE.PointLight( 0xffffff, .5, 100 );
+                                 pointLight.position.set( 5, 1, -5 );
+                                // scene.add( pointLight );
+
+				renderer = new THREE.WebGLRenderer( { antialias: true } );
+				renderer.setPixelRatio( window.devicePixelRatio );
+				renderer.setSize( window.innerWidth, window.innerHeight );
+				document.body.appendChild( renderer.domElement );
+
+				document.addEventListener( 'mousemove', onDocumentMouseMove, false );
+				document.addEventListener( 'mousedown', onDocumentMouseDown, false );
+				document.addEventListener( 'keydown', onDocumentKeyDown, false );
+				document.addEventListener( 'keyup', onDocumentKeyUp, false );
+				//
+           
+                
+			}
+			function onWindowResize() {
+
+				camera.aspect = window.innerWidth / window.innerHeight;
+				camera.updateProjectionMatrix();
+
+				renderer.setSize( window.innerWidth, window.innerHeight );
+
+			}
+
+			function onDocumentMouseMove( event ) {
+
+				event.preventDefault();
+
+				mouse.set( ( event.clientX / window.innerWidth ) * 2 - 1, - ( event.clientY / window.innerHeight ) * 2 + 1 );
+
+				raycaster.setFromCamera( mouse, camera );
+
+				var intersects = raycaster.intersectObjects( objects );
+
+				if ( intersects.length > 0 ) {
+
+					var intersect = intersects[ 0 ];
+
+					rollOverMesh.position.copy( intersect.point ).add( intersect.face.normal );
+					rollOverMesh.position.divideScalar( 50 ).floor().multiplyScalar( 50 ).addScalar( 25 );
+
+				}
+
+				render();
+
+			}
+
+			function onDocumentMouseDown( event ) {
+
+				event.preventDefault();
+
+				mouse.set( ( event.clientX / window.innerWidth ) * 2 - 1, - ( event.clientY / window.innerHeight ) * 2 + 1 );
+
+				raycaster.setFromCamera( mouse, camera );
+
+				var intersects = raycaster.intersectObjects( objects );
+
+				if ( intersects.length > 0 ) {
+
+					var intersect = intersects[ 0 ];
+
+					// delete cube
+
+					if ( isShiftDown ) {
+
+						if ( intersect.object !== plane ) {
+
+							scene.remove( intersect.object );
+
+							objects.splice( objects.indexOf( intersect.object ), 1 );
+
+						}
+
+						// create cube
+
+					} else { 
+                    if(blockt) {
+                        
+                        
+                        var voxel = new THREE.Mesh( cubeGeo, cubeMaterial1 );
+                 
+						voxel.position.copy( intersect.point ).add( intersect.face.normal );
+				        voxel.position.divideScalar( 50 ).floor().multiplyScalar( 50 ).addScalar( 25 ); 
+                        cuadrado  = document.getElementById("barrera");
+                         cuadrado.style.left="550"+"px";
+						scene.add( voxel );
+						objects.push( voxel );
+                       
+		                   }if(blockp){
+                           cuadrado= document.getElementById("barrera");
+                         cuadrado.style.left="500"+"px"; 
+                         
+                        var voxel = new THREE.Mesh( cubeGeo, cubeMaterial2 );
+						voxel.position.copy( intersect.point ).add( intersect.face.normal );
+				        voxel.position.divideScalar( 50 ).floor().multiplyScalar( 50 ).addScalar( 25 );
+						scene.add( voxel );
+						objects.push( voxel );
+                        
+
+                                 }
+                        if(block3){
+                             cuadrado= document.getElementById("barrera");
+                         cuadrado.style.left="600"+"px"; 
+                         
+                        var voxel = new THREE.Mesh( cubeGeo, cubeMaterial3 );
+						voxel.position.copy( intersect.point ).add( intersect.face.normal );
+				        voxel.position.divideScalar( 50 ).floor().multiplyScalar( 50 ).addScalar( 25 );
+						scene.add( voxel );
+						objects.push( voxel );   
+                            
+                            
+                            
+                            
+                      
+                            
+                        }
+				               
+						if(block4){
+                            
+                            
+                            
+                                cuadrado= document.getElementById("barrera");
+                         cuadrado.style.left="650"+"px"; 
+                         
+                        var voxel = new THREE.Mesh( cubeGeo, cubeMaterial4 );
+						voxel.position.copy( intersect.point ).add( intersect.face.normal );
+				        voxel.position.divideScalar( 50 ).floor().multiplyScalar( 50 ).addScalar( 25 );
+						scene.add( voxel );
+						objects.push( voxel );
+                        }
+
+					}
+
+					render();
+                    
+
+				}
+
+			}
+
+			function onDocumentKeyDown( event ) {
+
+				switch ( event.keyCode ) {
+
+					case 16: isShiftDown = true; break;
+                    case 49 : blockt = true; break; 
+                    case 50 : blockp = true; break; 
+                    case 51 : block3 = true; break;
+                    case 52 : block4 = true; break;
+				}
+
+			}
+
+			function onDocumentKeyUp( event ) {
+
+				switch ( event.keyCode ) {
+
+					case 16: isShiftDown = false; break;
+                     case 49 : blockt = false; break; 
+                    case 50 : blockp = false; break; 
+                    case 51 : block3 = false; break;
+                    case 52 : block4 = false; break;
+				}
+
+			}
+function animate(){
+			requestAnimationFrame( animate );
+			render();
+		}
+  function render(){
+				renderer.render( scene, camera );
+
+			}
+
+			
+			function Voxel(){
+		        var rollOverGeo = new THREE.BoxBufferGeometry( 50, 50, 50 );
+				rollOverMaterial = new THREE.MeshBasicMaterial( { color: 0xFFFFFF, opacity: 0.2, transparent: true } );
+				rollOverMesh = new THREE.Mesh( rollOverGeo, rollOverMaterial );
+				scene.add( rollOverMesh );
+				cubeGeo = new THREE.BoxBufferGeometry( 50, 50, 50 );
+			}
+			
+			
+
+	    </script>
+      </body>
+</html>

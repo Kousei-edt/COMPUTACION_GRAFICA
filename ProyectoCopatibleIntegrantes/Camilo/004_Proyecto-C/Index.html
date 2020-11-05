@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <script src="js/Funciones/three.min.js"></script>
+    <script src="js/controls/OrbitControls.js"></script>
+    <script src="js/Funciones/Escenario.js"></script>
+    <script src="js/libs/dat.gui.min.js"></script>
+    <script src="js/Funciones/GeometriaPrimitiva.js"></script>
+    <script src="js/Funciones/Home.js"></script>
+  
+    <link rel="stylesheet" href="css/main.css" media="screen"> 
+    <link rel="stylesheet" href="css/menu.css" media="screen">
+    <link rel="stylesheet" href="css/fonts.css" media="screen">
+</head>
+<body>
+    <header>
+        <nav class="menu-fixed"><ul>
+            <li><a href="Home.html" ><span class="Primero"><i class="icon icon-home "></i></span>Home</a></li>
+           <!-- <li><a href="#" ><span class="Segundo"><i class="icon icon-light-bulb"></i></span>Quiénes </a></li>
+            <li><a href="#" ><span class="Tercero"><i class="icon icon-game-controller "></i></span>Gamble</a> </li>-->
+                   <li><a href="#" ><span class="Cuarto"><i class="icon icon-save "></i></span>Partidas</a></li>
+            <li><a href="#" ><span class="Quinto"><i class="icon icon-block"></i></span>Guardar</a></li>
+        </ul></nav> 
+
+<!-- -->
+        <var >
+        <script>  
+            var scene, aspect, camera, renderer;
+            init();
+            animate();
+
+            function init(){
+                    fondo();
+                    CuboPrimitivo();    
+            }       
+            function animate() {
+                render();
+                controls.update();
+                requestAnimationFrame(animate);
+            }
+            render();
+        </script> 
+        </var>
+    </header>
+   
+    
+</body>
+</html>

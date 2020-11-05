@@ -4,10 +4,10 @@
             var cuadrado;
 			var rollOverMesh, rollOverMaterial;
 			var cubeGeo;
-          //  var cubeMaterial1 = new THREE.MeshLambertMaterial( { color: 0xFFFFFF, map: new THREE.TextureLoader().load( 'imagenes bloques/block.png' ),opacity: 1 } );
-          //  var cubeMaterial2 = new THREE.MeshLambertMaterial( { color: 0xFFFFFF, map: new THREE.TextureLoader().load( 'imagenes bloques/roca.png' ),opacity: 1 } );
-          //  var cubeMaterial3 = new THREE.MeshLambertMaterial( { color: 0xFFFFFF, map: new THREE.TextureLoader().load( 'imagenes bloques/diamante.png' ),opacity: 1 } );
-           // var cubeMaterial4 = new THREE.MeshLambertMaterial( { color: 0xFFFFFF, map: new THREE.TextureLoader().load( 'imagenes bloques/l.jpg' ),opacity: 1 } );
+            var cubeMaterial1 = new THREE.MeshLambertMaterial( { color: 0xFFFFFF, map: new THREE.TextureLoader().load( 'imagenes bloques/block.png' ),opacity: 1 } );
+            var cubeMaterial2 = new THREE.MeshLambertMaterial( { color: 0xFFFFFF, map: new THREE.TextureLoader().load( 'imagenes bloques/roca.png' ),opacity: 1 } );
+            var cubeMaterial3 = new THREE.MeshLambertMaterial( { color: 0xFFFFFF, map: new THREE.TextureLoader().load( 'imagenes bloques/diamante.png' ),opacity: 1 } );
+            var cubeMaterial4 = new THREE.MeshLambertMaterial( { color: 0xFFFFFF, map: new THREE.TextureLoader().load( 'imagenes bloques/l.jpg' ),opacity: 1 } );
 
             var plane;
               

@@ -1,7 +1,7 @@
 #cuadro{ 
     width: 40px;
     height: 40px; 
-    background-image:url();
+    background-image:url(../Imagenes/imagenesM/roca.png);
     position: absolute; 
     left: 500px; 
     top: 600px; }
@@ -27,7 +27,7 @@
 }
 #menu{
      position: absolute; 
-    background-image:url();
+    background-image:url(../Imagenes/imagenesM/2.png);
     top: 600px; 
     left: 550px; 
     width: 40px; 
@@ -37,7 +37,7 @@
 }
 #block3{
     position: absolute; 
-    background-image: url();
+    background-image: url(../Imagenes/imagenesM/diamante.png);
     top: 600px; 
     left: 600px; 
     width: 40px; 
@@ -45,7 +45,7 @@
 }
 #block4{
        position: absolute; 
-    background-image: url();
+    background-image: url(../Imagenes/imagenesM/l.png);
     top: 600px; 
     left: 650px; 
     width: 40px; 

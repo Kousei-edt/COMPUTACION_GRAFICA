@@ -223,14 +223,49 @@ function render_Camera(){
 }
 
 function Luz(){
-  var ambient = new THREE.AmbientLight( 0xffffff, 1 );
+	//CREAR ILUMINACIÓN Ambiente (colo, Intensidad)
+	 var ambient = new THREE.AmbientLight( 0xffffff, 2 );
+	 scene.add( ambient );  
+  } 
+  function LuzDos(){
+	// Luz direccianl 
+	var directionalLight = new THREE.DirectionalLight( 0xffffff, 0.5 );
+	scene.add( directionalLight );
+  }
+  function LuzTres(){
+	//Luz  HemisferioLuz 
+	var light = new THREE.HemisphereLight( 0xffffff, 0xCE2A06, 1 );
+	scene.add( light );
+  }
+  function LuzCuatro(){
+	//Pointlight
+	var light = new THREE.PointLight( 0xff0000, 1, 100 );
+	light.position.set( 50, 50, 50 );
+	scene.add( light );
+  }
+  function LuzCinco (){
+   //CREAR ILUMINACIÓN
+   var ambient = new THREE.AmbientLight( 0xffffff, 1 );
    scene.add( ambient );
-			
-   var pointLight = new THREE.PointLight( 0xffffff, 1, 100 );
-   pointLight.position.set( -5, 1, 5 );
-   scene.add( pointLight );
-			
-   var pointLight = new THREE.PointLight( 0xffffff, .5, 100 );
-   pointLight.position.set( 5, 1, -5 );
-   scene.add( pointLight );
-}
+   
+   var pointLight1 = new THREE.PointLight( 0xffffff, .2, 100 );
+   pointLight1.position.set( 10, 10, -10 );
+   scene.add( pointLight1 );
+  
+  var pointLight2 = new THREE.PointLight( 0xffffff, .5, 100 );
+   pointLight2.position.set( 20, 20, 20 );
+   scene.add( pointLight2 );
+  }
+  function LuzSeis (){
+	var light = new THREE.DirectionalLight(0xFFFFFF);
+	light.position.set(0, 10, 5);
+	scene.add(light);
+	var light2 = new THREE.DirectionalLight(0xFFFFFF);
+	light2.position.set(5, 10,0);
+	scene.add(light2);
+	 var light3 = new THREE.DirectionalLight(0xFFFFF);
+	light3.position.set(5, -10,0);
+	scene.add(light3);
+  
+  
+  }

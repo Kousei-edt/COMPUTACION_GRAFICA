@@ -3,10 +3,19 @@
   <head>
       <meta charset="utf-8">
     <title>Minecraft</title>
-   <link rel="stylesheet" type="text/css" href="style.css">
+   <link rel="stylesheet" type="text/css" href="css/style.css">
     <style>
         html, body { margin: 0; padding: 0; overflow: hidden;}
-    </style>
+	</style>
+	<script src="js/three.js"></script>
+	<script src="js/controls/OrbitControls.js"></script>
+    <script src="js/loaders/FBXLoader.js"></script>
+    <script src="js/poner.js"></script>
+    <script src="js/Escenario.js"></script>
+	<script src="js/Personaje_Minecraft.js"></script>
+	<script src="js/stats.module.js"></script>
+	<script src="js/three.js"></script>
+	<script src="js/FirstPersonControls.js"></script>
   </head>
    
     <body>
@@ -21,15 +30,8 @@
 </body>
   <body>
   
- <script src="js/three.js"></script>
-	<script src="js/controls/OrbitControls.js"></script>
-    <script src="js/loaders/FBXLoader.js"></script>
-    <script src="js/poner.js"></script>
-    <script src="js/Escenario.js"></script>
-	<script src="js/Personaje_Minecraft.js"></script>
-	<script src="js/stats.module.js"></script>
-	<script src="js/three.js"></script>
-	<script src="js/FirstPersonControls.js"></script>
+ 
+
     
     <script>
 		
@@ -37,6 +39,8 @@
 
 		init();
 		animate();
+
+	
 		
 		function init(){
 			fondo();
